@@ -1,1 +1,6 @@
-[].
+{"1.1.0",
+[{<<"flatlog">>,{pkg,<<"flatlog">>,<<"0.1.0">>},0}]}.
+[
+{pkg_hash,[
+ {<<"flatlog">>, <<"9ED6BFF0B64CEDC943C1C2AA7249B19B4B8652531D767B71E97355FDEC3EA7DF">>}]}
+].

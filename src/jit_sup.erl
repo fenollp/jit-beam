@@ -11,13 +11,26 @@
 -export([init/1]).
 
 -define(SERVER, ?MODULE).
+-define(WORKER(Name, Mod, Args)
+       ,#{id => Name
+         ,start => {Mod, start_link, Args}
+         ,restart => permanent
+         ,shutdown => 5 * 1000
+         ,type => worker
+         ,modules => [Mod]
+         }).
 
 %% API functions
 
 start_link() ->
     supervisor:start_link({local, ?SERVER}, ?MODULE, []).
 
-%% Supervisor callbacks
-
 init([]) ->
-    {ok, {{one_for_all, 0, 1}, []}}.
+    Children = [?WORKER(jit_state, jit_state, [])
+               ],
+
+    SupFlags = #{strategy => one_for_all
+                ,intensity => 3
+                ,period => 5
+                },
+    {ok, {SupFlags, Children}}.
