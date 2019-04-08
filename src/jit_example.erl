@@ -8,14 +8,14 @@
 -export([fib/1]).
 
 fib(0) ->
-    ?JIT_INCR(1),
+    ?JIT_INCR(4, 1),
     1;
 fib(1) ->
-    ?JIT_INCR(2),
+    ?JIT_INCR(4, 2),
     1;
 fib(2) ->
-    ?JIT_INCR(3),
+    ?JIT_INCR(4, 3),
     1;
 fib(N) when is_integer(N), N > 2 ->
-    ?JIT_INCR(4),
+    ?JIT_INCR(4, 4),
     fib(N-1) + fib(N-2).

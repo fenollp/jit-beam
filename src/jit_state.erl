@@ -7,7 +7,7 @@
 -include_lib("kernel/include/logger.hrl").
 
 -export([start_link/0]).
--export([maybe_create_then_get_cref/1]).
+-export([maybe_create_then_get_cref/2]).
 -export([init/1, terminate/2, code_change/3
         ,handle_info/2, handle_call/3, handle_cast/2
         ]).
@@ -23,10 +23,9 @@ start_link() ->
     gen_server:start({local,?MODULE}, ?MODULE, [], []).
 
 
-maybe_create_then_get_cref(Fun) ->
+maybe_create_then_get_cref(Fun, NClauses)
+  when is_function(Fun), is_integer(NClauses), NClauses > 0 ->
     {type,external} = erlang:fun_info(Fun, type),
-    %% jit_example:fib/1 has 4 clauses
-    NClauses = 4, %% FIXME: discover this somehow
     gen_server:call(?MODULE, {?FUNCTION_NAME,Fun,NClauses}).
 
 
