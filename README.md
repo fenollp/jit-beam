@@ -22,3 +22,7 @@ rebar3 shell
 ## What this does
 
 1. reorder clauses based on usage frequency
+
+
+## TODO
+* [coz-profiler](https://github.com/plasma-umass/coz) plots low hanging fruits by height [talk](https://youtu.be/r-TLSBdHe1A?t=1725) --> WebUI that offers optimization choices & applies them on the fly
